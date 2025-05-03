@@ -228,8 +228,17 @@
                             <div class="text-gray-900">{{ user.role }}</div>
                             <div class="text-gray-500">Status:</div>
                             <div>
-                                <span
-                                    :class="`px-2 py-0.5 inline-flex text-xs leading-5 font-semibold rounded-full ${user.statusClass}`">
+                                <span :class="[
+                                    'px-2 py-0.5 inline-flex items-center gap-1 text-xs font-semibold rounded-full',
+                                    user.status.toLowerCase() === 'active'
+                                        ? 'bg-green-100 text-green-800'
+                                        : 'bg-gray-100 text-gray-800'
+                                ]">
+                                    <svg v-if="user.status === 'active'" xmlns="http://www.w3.org/2000/svg"
+                                        class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                                        stroke-width="3">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                                    </svg>
                                     {{ user.status }}
                                 </span>
                             </div>
@@ -286,10 +295,19 @@
                                     <div class="text-sm text-gray-900">{{ user.role }}</div>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
-                                    <span
-                                        :class="`px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full ${user.statusClass}`">
-                                        {{ user.status }}
-                                    </span>
+                                    <span :class="[
+                                    'px-2 py-0.5 inline-flex items-center gap-1 text-xs font-semibold rounded-full',
+                                    user.status === 'Active'
+                                        ? 'bg-green-100 text-green-800'
+                                        : 'bg-gray-100 text-gray-800'
+                                ]">
+                                    <svg v-if="user.status === 'Active'" xmlns="http://www.w3.org/2000/svg"
+                                        class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                                        stroke-width="3">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                                    </svg>
+                                    {{ user.status }}
+                                </span>
                                 </td>
                             </tr>
                         </tbody>
