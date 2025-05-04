@@ -66,12 +66,12 @@
                         <div>
                             <div class="flex items-center justify-between mb-1">
                                 <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
-                                <div class="text-xs">
+                                <!-- <div class="text-xs">
                                     <a href="#"
                                         class="font-medium text-emerald-600 hover:text-emerald-500 transition-colors">
                                         Forgot password?
                                     </a>
-                                </div>
+                                </div> -->
                             </div>
                             <div class="relative rounded-md shadow-sm">
                                 <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -136,14 +136,12 @@
                             </button>
                         </div>
                     </form>
-
-
-                    <div class="mt-6 text-center text-sm">
+                    <!-- <div class="mt-6 text-center text-sm">
                         <span class="text-gray-500">Don't have an account?</span>
                         <a href="#" class="ml-1 font-medium text-emerald-600 hover:text-emerald-500 transition-colors">
                             Create one now
                         </a>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>
