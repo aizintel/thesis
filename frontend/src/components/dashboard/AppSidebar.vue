@@ -121,7 +121,7 @@
                     <span class="font-medium text-sm">JD</span>
                 </div>
                 <div class="ml-3">
-                    <p class="text-sm font-medium text-gray-900">John Doe</p>
+                    <p class="text-sm font-medium text-gray-900">John Bai</p>
                     <p class="text-xs text-gray-500">Administrator</p>
                 </div>
                 <button class="ml-auto p-1 rounded-md hover:bg-gray-100">
