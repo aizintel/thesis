@@ -77,7 +77,7 @@
                 <div class="flex items-center justify-between">
                     <div>
                         <p class="text-xs md:text-sm font-medium text-gray-500">Inventory Value</p>
-                        <h3 class="text-xl md:text-2xl font-bold text-gray-900 mt-1">${{ totalInventoryValue.toFixed(2)
+                        <h3 class="text-xl md:text-2xl font-bold text-gray-900 mt-1">₱{{ totalInventoryValue.toFixed(2)
                             }}</h3>
                     </div>
                     <div class="w-10 h-10 md:w-12 md:h-12 bg-emerald-50 rounded-lg flex items-center justify-center">
@@ -93,11 +93,11 @@
                 <div class="mt-3 md:mt-4">
                     <div class="flex items-center justify-between text-xs md:text-sm">
                         <span class="text-gray-500">Avg. Product Price</span>
-                        <span class="font-medium text-gray-900">${{ averageProductPrice.toFixed(2) }}</span>
+                        <span class="font-medium text-gray-900">₱{{ averageProductPrice.toFixed(2) }}</span>
                     </div>
                     <div class="flex items-center justify-between text-xs md:text-sm mt-1.5 md:mt-2">
                         <span class="text-gray-500">Most Expensive</span>
-                        <span class="font-medium text-gray-900">${{ mostExpensivePrice.toFixed(2) }}</span>
+                        <span class="font-medium text-gray-900">₱{{ mostExpensivePrice.toFixed(2) }}</span>
                     </div>
                 </div>
             </div>
@@ -134,7 +134,7 @@
                             <div class="text-gray-500">Stock:</div>
                             <div class="text-gray-900">{{ item.stock }} units</div>
                             <div class="text-gray-500">Price:</div>
-                            <div class="text-gray-900">${{ item?.price }}</div>
+                            <div class="text-gray-900">₱{{ item?.price }}</div>
                         </div>
                     </div>
                 </div>
@@ -189,7 +189,7 @@
                                     <div class="text-sm text-gray-900">{{ item.stock }} units</div>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                    ${{ item?.price }}
+                                    ₱{{ item?.price }}
                                 </td>
                             </tr>
                         </tbody>

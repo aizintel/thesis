@@ -45,7 +45,7 @@
                     </div>
 
                     <div class="text-gray-500">Price:</div>
-                    <div class="text-gray-900">${{ item.price.toFixed(2) }}</div>
+                    <div class="text-gray-900">₱{{ item.price.toFixed(2) }}</div>
 
                     <div class="text-gray-500">Status:</div>
                     <div>

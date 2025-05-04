@@ -56,7 +56,7 @@
 
                                         <div class="sm:col-span-3">
                                             <label for="price" class="block text-sm font-medium text-gray-700">Price
-                                                ($)</label>
+                                                (₱)</label>
                                             <input type="number" step="0.01" id="price" v-model.number="productFormData.price"
                                                 min="0.01"
                                                 class="p-2.5 h-10 mt-1.5 focus:ring-emerald-500 focus:border-emerald-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-lg"
