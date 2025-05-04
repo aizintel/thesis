@@ -23,8 +23,6 @@
 
                 <nav class="hidden md:flex md:items-center md:space-x-6">
                     <a href="#features" class="text-base font-medium text-gray-700 hover:text-gray-900">Features</a>
-                    <a href="#pricing" class="text-base font-medium text-gray-700 hover:text-gray-900">Pricing</a>
-                    <a href="#contact" class="text-base font-medium text-gray-700 hover:text-gray-900">Contact</a>
                     <button @click="$emit('open-login')"
                         class="ml-4 px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-emerald-600 hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500 transition-colors">
                         Login

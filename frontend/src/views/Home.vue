@@ -26,8 +26,6 @@ const router = useRouter();
 const showLoginModal = ref(false);
 
 const handleLogin = (credentials: { email: string, password: string, remember: boolean }) => {
-  // In a real application, you would validate credentials against a backend
-  // For demo purposes, we'll just navigate to the dashboard
   console.log('Login with:', credentials);
   router.push('/dashboard');
 };
