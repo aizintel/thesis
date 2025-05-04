@@ -124,14 +124,16 @@
                     <p class="text-sm font-medium text-gray-900">John Bai</p>
                     <p class="text-xs text-gray-500">Administrator</p>
                 </div>
-                <button class="ml-auto p-1 rounded-md hover:bg-gray-100">
+                <button @click="$emit('logout-user')" class="ml-auto p-1 rounded-md hover:bg-gray-100">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-500" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                         stroke-linejoin="round">
-                        <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9" />
-                        <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0" />
+                        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+                        <polyline points="16 17 21 12 16 7" />
+                        <line x1="21" y1="12" x2="9" y2="12" />
                     </svg>
                 </button>
+
             </div>
         </div>
     </aside>
@@ -146,5 +148,6 @@ defineProps<{
 defineEmits<{
     (e: 'toggle-sidebar'): void;
     (e: 'set-active-tab', tab: string): void;
+    (e: 'logout-user'): void;
 }>();
 </script>

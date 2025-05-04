@@ -2,7 +2,7 @@
     <div class="min-h-screen bg-white">
         <div class="flex h-screen overflow-hidden">
             <AppSidebar :sidebarOpen="sidebarOpen" :activeTab="activeTab" @toggle-sidebar="toggleSidebar"
-                @set-active-tab="setActiveTab" />
+                @set-active-tab="setActiveTab" @logout-user="logoutUser()" />
 
             <div class="flex-1 md:ml-64">
                 <MobileHeader :pageTitle="getPageTitle" @toggle-sidebar="toggleSidebar" />
@@ -100,6 +100,7 @@ import DeleteConfirmationModal from '@/components/dashboard/DeleteConfirmationMo
 // Pinia
 import { useUserStore } from '@/stores';
 import { storeToRefs } from 'pinia';
+import router from '@/router';
 
 const userStore = useUserStore();
 
@@ -207,6 +208,12 @@ const isSubmitDisabled = computed<boolean>(() => {
     }
     return false;
 });
+
+
+const logoutUser = (): void => {
+    router.push('/');
+};
+
 
 const toggleSidebar = (): void => {
     sidebarOpen.value = !sidebarOpen.value;
