@@ -16,7 +16,7 @@
                         <path d="M3 9h18" />
                     </svg>
                 </div>
-                <span class="text-lg font-semibold text-gray-900">Bai Track</span>
+                <span class="text-lg font-semibold text-gray-900">BAITRACK</span>
             </div>
             <button @click="$emit('toggle-sidebar')" class="p-1 rounded-md md:hidden hover:bg-gray-100">
                 <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-500" viewBox="0 0 24 24" fill="none"
@@ -85,7 +85,7 @@
                 Users
             </a>
 
-            <div class="mt-6 mb-4 px-3">
+            <!-- <div class="mt-6 mb-4 px-3">
                 <h3 class="text-xs font-medium uppercase tracking-wider text-gray-500">
                     Reports
                 </h3>
@@ -99,9 +99,9 @@
                     <path d="m19 9-5 5-4-4-3 3" />
                 </svg>
                 Analytics
-            </a>
+            </a> -->
 
-            <a href="#"
+            <!-- <a href="#"
                 class="flex items-center px-3 py-2.5 text-sm font-medium text-gray-700 rounded-lg hover:bg-gray-50 hover:text-gray-900">
                 <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-3 text-gray-500" viewBox="0 0 24 24"
                     fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -111,14 +111,14 @@
                     <path d="M7 17h10" />
                 </svg>
                 Reports
-            </a>
+            </a> -->
         </nav>
 
         <div class="p-4 border-t border-gray-100">
             <div class="flex items-center">
                 <div
                     class="flex-shrink-0 w-8 h-8 bg-emerald-100 text-emerald-600 rounded-md flex items-center justify-center">
-                    <span class="font-medium text-sm">JD</span>
+                    <span class="font-medium text-sm">JB</span>
                 </div>
                 <div class="ml-3">
                     <p class="text-sm font-medium text-gray-900">John Bai</p>
