@@ -4,13 +4,13 @@ import {
     deleteUser as deleteUserFromDB,
     getAllUsers as getAllUsersFromDB,
     editUser as editUserInDB
-} from "../config/services/userService";
+} from "../config/services/user.service";
 import {
     addProduct as addProductToDB,
     deleteProduct as deleteProductFromDB,
     getAllProducts as getAllProductsFromDB,
     editProduct as editProductInDB
-} from "../config/services/productService";
+} from "../config/services/product.service";
 
 export const addUser = async (req: Request, res: Response): Promise<void> => {
     const { name, email, password, role, status } = req.body;
