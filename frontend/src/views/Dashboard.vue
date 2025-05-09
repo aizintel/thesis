@@ -71,6 +71,17 @@
                         <UsersView v-if="activeTab === 'users' && !isLoading" :users="users"
                             @open-add-item-modal="openAddItemModal" @edit-user="editUser"
                             @confirm-delete-user="confirmDeleteUser" />
+
+
+                        <AnalyticsDashboard v-if="activeTab === 'analytics' && !isLoading" :metrics="salesMetrics"
+                            :graphData="overviewGraphData" @export-data="handleExportData"
+                            @view-details="handleViewDetails" @filter-metric="handleFilterMetric" />
+
+                        <ReportsDashboard v-if="activeTab === 'reports' && !isLoading" :reports="reports"
+                            :filters="filters" @update-filters="updateFilters" @export-data="handleExportData"
+                            @view-details="handleViewDetails" @filter-metric="handleFilterMetric"
+                            @submit-report="submitReport" @update-report-status="updateReportStatus" />
+
                     </div>
                 </main>
             </div>
@@ -91,8 +102,8 @@ import { ref, computed, reactive, onMounted } from 'vue';
 import AppSidebar from '@/components/dashboard/AppSidebar.vue';
 import MobileHeader from '@/components/dashboard/MobileHeader.vue';
 import DashboardView from '@/components/dashboard/DashboardView.vue';
-import ProductsView from '@/components/dashboard/ProductsView.vue';
-import UsersView from '@/components/dashboard/UsersView.vue';
+import ProductsView from '@/components/dashboard/product/ProductsView.vue';
+import UsersView from '@/components/dashboard/user/UsersView.vue';
 import AddEditModal from '@/components/dashboard/AddEditModal.vue';
 import DeleteConfirmationModal from '@/components/dashboard/DeleteConfirmationModal.vue';
 
@@ -108,9 +119,9 @@ const {
     users,
     products: productInventory,
     error,
-    isLoading
 } = storeToRefs(userStore);
 
+const isLoading = ref<boolean>(false);
 const isSubmitting = ref<boolean>(false);
 const isDeleting = ref<boolean>(false);
 
@@ -157,6 +168,17 @@ interface UserFormData {
     password: string;
 }
 
+
+interface ReportFormData {
+    product: string;
+    productId: string;
+    reportedBy: string;
+    email: string;
+    issueType: string;
+    description: string;
+    date: string;
+}
+
 const sidebarOpen = ref<boolean>(false);
 const showAddItemModal = ref<boolean>(false);
 const showDeleteModal = ref<boolean>(false);
@@ -185,7 +207,175 @@ const userFormData = reactive<UserFormData>({
     password: ''
 });
 
+const reportFormData = reactive<ReportFormData>({
+    product: '',
+    productId: '',
+    reportedBy: '',
+    email: '',
+    issueType: '',
+    description: '',
+    date: '',
+    status: '',
+})
+
+
 const loading = ref(false);
+
+import AnalyticsDashboard from '@/components/dashboard/analytics/analyticsView.vue';
+
+import ReportsDashboard from '@/components/dashboard/reports/reportsView.vue';
+
+interface Report {
+    id: string;
+    product: string;
+    productId: string;
+    reportedBy: string;
+    email: string;
+    issueType: string;
+    description: string;
+    date: Date;
+    status: string;
+}
+
+interface Filters {
+    status: string;
+    dateRange: string;
+    search: string;
+}
+
+
+
+const reports = ref<Report[]>([
+    {
+        id: '1',
+        product: 'Wireless Headphones',
+        productId: 'PRD-001',
+        reportedBy: 'John Smith',
+        email: 'john.smith@example.com',
+        issueType: 'Defective Product',
+        description: 'The right earphone stopped working after 2 days of use. I\'ve tried resetting and recharging but the issue persists.',
+        date: new Date('2023-05-10T14:30:00'),
+        status: 'Pending',
+    },
+    {
+        id: '2',
+        product: 'Smart Watch Pro',
+        productId: 'PRD-042',
+        reportedBy: 'Emily Johnson',
+        email: 'emily.j@example.com',
+        issueType: 'Wrong Item Received',
+        description: 'I ordered the black Smart Watch Pro but received the silver model instead.',
+        date: new Date('2023-05-08T09:15:00'),
+        status: 'In Progress',
+    },
+]);
+
+const filters = ref<Filters>({
+    status: 'all',
+    dateRange: 'all',
+    search: ''
+});
+
+const updateFilters = (newFilters: Filters): void => {
+    filters.value = { ...filters.value, ...newFilters };
+};
+
+const submitReport = (reportData: ReportFormData): void => {
+    const newId = (reports.value.length + 1).toString();
+
+    const newReport: Report = {
+        id: newId,
+        ...reportData,
+        date: new Date(),
+        status: 'Pending',
+    };
+
+    reports.value.unshift(newReport);
+
+
+};
+
+const updateReportStatus = (reportId: string, newStatus: string): void => {
+    const reportIndex = reports.value.findIndex(r => r.id === reportId);
+    if (reportIndex !== -1) {
+        reports.value[reportIndex].status = newStatus;
+    }
+};
+
+const overviewGraphData = ref({
+    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+    datasets: [
+        {
+            label: 'Total Sales',
+            data: [12500, 17800, 15300, 21000, 24500, 28700],
+            color: '#000000'
+        },
+        {
+            label: 'Total Products',
+            data: [320, 350, 305, 490, 520, 580],
+            color: '#3b82f6'
+        },
+        {
+            label: 'Rejected Products',
+            data: [45, 52, 38, 41, 35, 29],
+            color: '#ef4444'
+        }
+    ]
+});
+
+const salesMetrics = ref([
+    {
+        id: '1',
+        name: 'Total Amount Sold',
+        icon: '💰',
+        current: '$28,700',
+        previous: '$24,500',
+        change: '+17.1%',
+        trend: 'up',
+        graphData: [12500, 17800, 15300, 21000, 24500, 28700]
+    },
+    {
+        id: '2',
+        name: 'Total Products',
+        icon: '📦',
+        current: '580',
+        previous: '520',
+        change: '+11.5%',
+        trend: 'up',
+        graphData: [320, 350, 305, 490, 520, 580]
+    },
+    {
+        id: '3',
+        name: 'Rejected Products',
+        icon: '❌',
+        current: '29',
+        previous: '35',
+        change: '-17.1%',
+        trend: 'down',
+        graphData: [45, 52, 38, 41, 35, 29]
+    },
+    {
+        id: '4',
+        name: 'Average Order Value',
+        icon: '🛒',
+        current: '$124.50',
+        previous: '$118.30',
+        change: '+5.2%',
+        trend: 'up',
+        graphData: [105.20, 110.40, 115.80, 112.30, 118.30, 124.50]
+    },
+    {
+        id: '5',
+        name: 'Conversion Rate',
+        icon: '📈',
+        current: '4.2%',
+        previous: '3.8%',
+        change: '+10.5%',
+        trend: 'up',
+        graphData: [3.1, 3.4, 3.6, 3.5, 3.8, 4.2]
+    }
+]);
+
 
 onMounted(async () => {
     try {
@@ -211,10 +401,10 @@ const isSubmitDisabled = computed<boolean>(() => {
 
 
 const logoutUser = async (): Promise<void> => {
-  await authStore.logout();
-  router.push('/').then(() => {
-    window.location.reload(); 
-  });
+    await authStore.logout();
+    router.push('/').then(() => {
+        window.location.reload();
+    });
 };
 
 
@@ -237,6 +427,10 @@ const getPageTitle = computed((): string => {
             return 'Products';
         case 'users':
             return 'Users';
+        case 'analytics':
+            return 'Analytics';
+        case 'reports':
+            return 'Reports'
         default:
             return 'Inventory';
     }
@@ -247,6 +441,21 @@ const tabs: Tab[] = [
     { id: 'products', name: 'Products' },
     { id: 'users', name: 'Users' }
 ];
+
+const handleExportData = () => {
+    console.log('Exporting sales data...');
+
+};
+
+const handleViewDetails = (metric: any, id: string) => {
+    console.log('Viewing details for:', metric.name, 'ID:', id);
+
+};
+
+const handleFilterMetric = (metric: any) => {
+    console.log('Filtering by metric:', metric.name);
+
+};
 
 const inStockCount = computed((): number => {
     return productInventory.value.filter(item => item.stock > 20).length;

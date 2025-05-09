@@ -6,9 +6,8 @@
         <div class="flex items-center justify-between h-16 px-4 border-b border-zinc-800">
             <div class="flex items-center gap-2">
                 <div class="flex items-center justify-center w-8 h-8 rounded-md bg-white">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-black" viewBox="0 0 24 24"
-                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-black" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <path d="M3 9h18v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V9Z" />
                         <path d="M3 9V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v4" />
                         <path d="M21 9V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v4" />
@@ -17,8 +16,8 @@
                 </div>
                 <span class="text-lg font-semibold text-white">BAITRACK</span>
             </div>
-            <button @click="$emit('toggle-sidebar')" 
-                    class="p-1 rounded-md md:hidden transition-all duration-300 hover:bg-zinc-800 active:scale-95">
+            <button @click="$emit('toggle-sidebar')"
+                class="p-1 rounded-md md:hidden transition-all duration-300 hover:bg-zinc-800 active:scale-95">
                 <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none"
                     stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <path d="m15 18-6-6 6-6" />
@@ -26,7 +25,7 @@
             </button>
         </div>
 
-        <nav class="flex-1 px-2 py-4 space-y-1 overflow-y-auto">
+        <nav class="flex flex-col flex-1 px-2 py-4 overflow-y-auto space-y-1">
             <div class="mb-4 px-3">
                 <h3 class="text-xs font-medium uppercase tracking-wider text-zinc-400">
                     Management
@@ -83,22 +82,62 @@
                 </svg>
                 Users
             </a>
+
+            <div class="mt-auto mb-4 px-3">
+                <h3 class="text-xs font-medium uppercase tracking-wider text-gray-500">
+                    Reports
+                </h3>
+            </div>
+
+            <a href="#" @click.prevent="$emit('set-active-tab', 'analytics')" :class="[
+                'flex items-center px-3 py-2.5 text-sm font-medium rounded-lg transition-all duration-300',
+                activeTab === 'analytics'
+                    ? 'bg-white text-black'
+                    : 'text-zinc-300 hover:bg-zinc-800 hover:text-white'
+            ]">
+
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-3"
+                    :class="activeTab === 'analytics' ? 'text-black' : 'text-zinc-400'" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 3v18h18" />
+                    <path d="m19 9-5 5-4-4-3 3" />
+                </svg>
+                Analytics
+            </a>
+            <a href="#" @click.prevent="$emit('set-active-tab', 'reports')" :class="[
+                'flex items-center px-3 py-2.5 text-sm font-medium rounded-lg transition-all duration-300',
+                activeTab === 'reports'
+                    ? 'bg-white text-black'
+                    : 'text-zinc-300 hover:bg-zinc-800 hover:text-white'
+            ]">
+
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-3"
+                    :class="activeTab === 'reports' ? 'text-black' : 'text-zinc-400'" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect width="18" height="18" x="3" y="3" rx="2" />
+                    <path d="M7 7h10" />
+                    <path d="M7 12h10" />
+                    <path d="M7 17h10" />
+                </svg>
+                Reports
+            </a>
+
         </nav>
 
         <div class="p-4 border-t border-zinc-800">
             <div class="flex items-center">
-                <div
-                    class="flex-shrink-0 w-8 h-8 bg-white text-black rounded-md flex items-center justify-center">
-                    <span class="font-medium text-sm"> {{ userInfo.name.split(' ').map((w: any[]) => w[0]).join('').toUpperCase() }}
-</span>
+                <div class="flex-shrink-0 w-8 h-8 bg-white text-black rounded-md flex items-center justify-center">
+                    <span class="font-medium text-sm"> {{userInfo.name.split(' ').map((w: any[]) =>
+                        w[0]).join('').toUpperCase() }}
+                    </span>
                 </div>
                 <div class="ml-3">
                     <p class="text-sm font-medium text-white">{{ userInfo.name }}</p>
                     <p class="text-xs text-zinc-400">{{ userInfo.role.charAt(0).toUpperCase() + userInfo.role.slice(1)
- }}</p>
+                        }}</p>
                 </div>
-                <button @click="$emit('logout-user')" 
-                        class="ml-auto p-1 rounded-md transition-all duration-300 hover:bg-zinc-800 active:scale-95">
+                <button @click="$emit('logout-user')"
+                    class="ml-auto p-1 rounded-md transition-all duration-300 hover:bg-zinc-800 active:scale-95">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-zinc-400" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                         stroke-linejoin="round">
