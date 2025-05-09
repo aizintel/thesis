@@ -14,11 +14,11 @@ const router = createRouter({
       component: () => import('@/views/Dashboard.vue'),
       meta: { requiresAuth: true },
     },
-    {
-      path: '/sign-up',
-      name: 'signup',
-      component: () => import('@/views/Sign-up.vue'),
-    },
+    // {
+    //   path: '/sign-up',
+    //   name: 'signup',
+    //   component: () => import('@/views/Sign-up.vue'),
+    // },
   ],
 })
 
@@ -26,8 +26,11 @@ import { useAuthStore } from '@/stores'
 
 router.beforeEach(async (to, from, next) => {
   const authStore = useAuthStore()
- 
-  if (to.meta.requiresAuth && !authStore.isAuthenticated) {
+  await authStore.checkAuth()
+
+  if (to.name === 'home' && authStore.isAuthenticated) {
+    next({ name: 'dashboard' })
+  } else if (to.meta.requiresAuth && !authStore.isAuthenticated) {
     next({ name: 'home' })
   } else {
     next()

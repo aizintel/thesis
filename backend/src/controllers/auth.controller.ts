@@ -34,6 +34,7 @@ export const signIn = async (req: Request, res: Response): Promise<void> => {
       data: {
         id: user.id,
         email: user.email,
+        name: user.name,
         password: user.password,
         role: user.role,
         token: token,

@@ -89,11 +89,13 @@
             <div class="flex items-center">
                 <div
                     class="flex-shrink-0 w-8 h-8 bg-white text-black rounded-md flex items-center justify-center">
-                    <span class="font-medium text-sm">JB</span>
+                    <span class="font-medium text-sm"> {{ userInfo.name.split(' ').map(w => w[0]).join('').toUpperCase() }}
+</span>
                 </div>
                 <div class="ml-3">
-                    <p class="text-sm font-medium text-white">John Bai</p>
-                    <p class="text-xs text-zinc-400">Administrator</p>
+                    <p class="text-sm font-medium text-white">{{ userInfo.name }}</p>
+                    <p class="text-xs text-zinc-400">{{ userInfo.role.charAt(0).toUpperCase() + userInfo.role.slice(1)
+ }}</p>
                 </div>
                 <button @click="$emit('logout-user')" 
                         class="ml-auto p-1 rounded-md transition-all duration-300 hover:bg-zinc-800 active:scale-95">
@@ -114,6 +116,7 @@
 defineProps<{
     sidebarOpen: boolean;
     activeTab: string;
+    userInfo: any;
 }>();
 
 defineEmits<{

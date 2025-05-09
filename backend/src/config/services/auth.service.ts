@@ -14,6 +14,7 @@ export function getInfoByEmail(email?: string): Auth | ErrorResponse {
     return {
       id: user.id,
       email: user.email,
+      name: user.name,
       password: user.password,
       role: user.role,
     };
@@ -36,6 +37,7 @@ export function getInfoById(id: any): Auth | ErrorResponse {
     return {
       id: user.id,
       email: user.email,
+      name: user.name,
       password: user.password,
       role: user.role,
     };

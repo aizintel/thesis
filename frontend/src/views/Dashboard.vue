@@ -2,7 +2,7 @@
     <div class="min-h-screen bg-zinc-100">
         <div class="flex h-screen overflow-hidden">
             <AppSidebar :sidebarOpen="sidebarOpen" :activeTab="activeTab" @toggle-sidebar="toggleSidebar"
-                @set-active-tab="setActiveTab" @logout-user="logoutUser()" />
+                @set-active-tab="setActiveTab" @logout-user="logoutUser()" :userInfo="authStore.user" />
 
             <div class="flex-1 md:ml-64">
                 <MobileHeader :pageTitle="getPageTitle" @toggle-sidebar="toggleSidebar" />
@@ -97,11 +97,12 @@ import AddEditModal from '@/components/dashboard/AddEditModal.vue';
 import DeleteConfirmationModal from '@/components/dashboard/DeleteConfirmationModal.vue';
 
 // Pinia
-import { useUserStore } from '@/stores';
+import { useUserStore, useAuthStore } from '@/stores';
 import { storeToRefs } from 'pinia';
 import router from '@/router';
 
 const userStore = useUserStore();
+const authStore = useAuthStore();
 
 const {
     users,
@@ -209,8 +210,11 @@ const isSubmitDisabled = computed<boolean>(() => {
 });
 
 
-const logoutUser = (): void => {
-    router.push('/');
+const logoutUser = async (): Promise<void> => {
+  await authStore.logout();
+  router.push('/').then(() => {
+    window.location.reload(); 
+  });
 };
 
 
