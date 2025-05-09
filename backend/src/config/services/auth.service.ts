@@ -30,7 +30,7 @@ export function getInfoById(id: any): Auth | ErrorResponse {
       .get(id);
 
     if (!user) {
-      return { error: "Invalid email or password." };
+      return { error: "Token is expired." };
     }
 
     return {

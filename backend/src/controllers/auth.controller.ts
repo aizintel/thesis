@@ -81,11 +81,9 @@ export const checkAuth = async (req: Request, res: Response): Promise<void> => {
   
     res.status(200).json({
       data: {
-        id: user.id,
-        email: user.email,
-        password: user.password,
-        role: user.role,
-        token: token,
+        id: decodeToken,
+        user
+        
       },
     });
   } catch (error) {
