@@ -1,5 +1,5 @@
 <template>
-    <div class="min-h-screen bg-white">
+    <div class="min-h-screen bg-zinc-100">
         <div class="flex h-screen overflow-hidden">
             <AppSidebar :sidebarOpen="sidebarOpen" :activeTab="activeTab" @toggle-sidebar="toggleSidebar"
                 @set-active-tab="setActiveTab" @logout-user="logoutUser()" />
@@ -7,11 +7,10 @@
             <div class="flex-1 md:ml-64">
                 <MobileHeader :pageTitle="getPageTitle" @toggle-sidebar="toggleSidebar" />
 
-
                 <div v-if="isLoading"
                     class="absolute inset-0 bg-white bg-opacity-70 z-50 flex items-center justify-center">
                     <div class="flex flex-col items-center">
-                        <svg class="animate-spin h-10 w-10 text-emerald-600 mb-4" xmlns="http://www.w3.org/2000/svg"
+                        <svg class="animate-spin h-10 w-10 text-black mb-4" xmlns="http://www.w3.org/2000/svg"
                             fill="none" viewBox="0 0 24 24">
                             <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4">
                             </circle>
@@ -19,7 +18,7 @@
                                 d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z">
                             </path>
                         </svg>
-                        <p class="text-emerald-800 font-medium">Loading data...</p>
+                        <p class="text-zinc-800 font-medium">Loading data...</p>
                     </div>
                 </div>
 
@@ -43,7 +42,7 @@
                                 <div class="ml-auto pl-3">
                                     <div class="-mx-1.5 -my-1.5">
                                         <button @click="error = ''"
-                                            class="inline-flex rounded-md p-1.5 text-red-500 hover:bg-red-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
+                                            class="inline-flex rounded-md p-1.5 text-red-500 hover:bg-red-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 transition-all duration-300 active:scale-95">
                                             <span class="sr-only">Dismiss</span>
                                             <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
                                                 fill="currentColor">
@@ -188,8 +187,8 @@ const userFormData = reactive<UserFormData>({
 const loading = ref(false);
 
 onMounted(async () => {
-    loading.value = true;
     try {
+        loading.value = true;
         await Promise.all([
             userStore.fetchUsers(),
             userStore.fetchProducts()
@@ -410,8 +409,6 @@ const submitFormProduct = async (): Promise<void> => {
     isSubmitting.value = true;
 
     try {
-
-
         const productItem: ProductItem = {
             id: productFormData.id,
             name: productFormData.name,
@@ -443,8 +440,6 @@ const submitUserForm = async (): Promise<void> => {
     isSubmitting.value = true;
 
     try {
-
-
         const user: User = {
             id: userFormData.id,
             name: userFormData.name,

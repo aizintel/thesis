@@ -1,20 +1,18 @@
 <template>
     <div class="fixed z-50 inset-0 overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true">
 
-        <div class="fixed inset-0 bg-gray-500 bg-opacity-75 backdrop-blur-sm transition-opacity" aria-hidden="true"
+        <div class="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm transition-opacity" aria-hidden="true"
             @click="$emit('close')"></div>
-
 
         <div class="flex items-center justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:block sm:p-0">
 
             <div
                 class="relative inline-block align-bottom bg-white rounded-xl text-left overflow-hidden shadow-2xl transform transition-all sm:my-8 sm:align-middle sm:max-w-md w-full">
 
-                <div class="bg-gradient-to-r from-emerald-600 to-emerald-500 h-2"></div>
-
+                <div class="bg-gradient-to-r from-black to-zinc-800 h-2"></div>
 
                 <button @click="$emit('close')"
-                    class="absolute top-3 right-3 p-1.5 rounded-full bg-gray-100 text-gray-500 hover:bg-gray-200 hover:text-gray-700 transition-colors focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                    class="absolute top-3 right-3 p-1.5 rounded-full bg-zinc-100 text-zinc-500 hover:bg-zinc-200 hover:text-zinc-700 transition-all duration-300 active:scale-95 focus:outline-none focus:ring-2 focus:ring-black"
                     aria-label="Close">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                         <path fill-rule="evenodd"
@@ -27,67 +25,66 @@
 
                     <div class="text-center sm:text-left mb-6">
                         <div class="flex items-center justify-center sm:justify-start mb-3">
-                            <div class="bg-emerald-100 rounded-full p-2">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-emerald-600" fill="none"
+                            <div class="bg-zinc-100 rounded-full p-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-black" fill="none"
                                     viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
                                 </svg>
                             </div>
-                            <h3 class="ml-3 text-xl font-semibold text-gray-900" id="modal-title">
+                            <h3 class="ml-3 text-xl font-semibold text-zinc-900" id="modal-title">
                                 Welcome back
                             </h3>
                         </div>
-                        <p class="text-gray-500 text-sm">
+                        <p class="text-zinc-500 text-sm">
                             Sign in to access your Bai Track dashboard
                         </p>
                     </div>
 
-
                     <form @submit.prevent="handleSubmit" class="space-y-5">
 
                         <div>
-                            <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email
+                            <label for="email" class="block text-sm font-medium text-zinc-700 mb-1">Email
                                 address</label>
                             <div class="relative rounded-md shadow-sm">
                                 <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" fill="none"
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-zinc-400" fill="none"
                                         viewBox="0 0 24 24" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                             d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207" />
                                     </svg>
                                 </div>
-                                <input id="email" name="email" type="email" requiemerald v-model="email"
-                                    class="appearance-none block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 text-sm"
+                                <input id="email" name="email" type="email" required v-model="email"
+                                    class="appearance-none block w-full pl-10 pr-3 py-3 border border-zinc-300 rounded-lg shadow-sm placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-black focus:border-black text-sm transition-all"
                                     placeholder="you@example.com" />
                             </div>
                         </div>
 
                         <div>
                             <div class="flex items-center justify-between mb-1">
-                                <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
+                                <label for="password" class="block text-sm font-medium text-zinc-700">Password</label>
                                 <!-- <div class="text-xs">
                                     <a href="#"
-                                        class="font-medium text-emerald-600 hover:text-emerald-500 transition-colors">
+                                        class="font-medium text-black hover:text-zinc-700 transition-colors">
                                         Forgot password?
                                     </a>
                                 </div> -->
                             </div>
                             <div class="relative rounded-md shadow-sm">
                                 <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" fill="none"
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-zinc-400" fill="none"
                                         viewBox="0 0 24 24" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                             d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
                                     </svg>
                                 </div>
                                 <input :type="showPassword ? 'text' : 'password'" id="password" name="password"
-                                    requiemerald v-model="password"
-                                    class="appearance-none block w-full pl-10 pr-10 py-3 border border-gray-300 rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 text-sm"
+                                    required v-model="password"
+                                    class="appearance-none block w-full pl-10 pr-10 py-3 border border-zinc-300 rounded-lg shadow-sm placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-black focus:border-black text-sm transition-all"
                                     placeholder="••••••••" />
                                 <div class="absolute inset-y-0 right-0 pr-3 flex items-center">
                                     <button type="button" @click="showPassword = !showPassword"
-                                        class="text-gray-400 hover:text-gray-500 focus:outline-none">
+                                        class="text-zinc-400 hover:text-zinc-500 focus:outline-none transition-colors">
                                         <svg v-if="showPassword" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5"
                                             fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -105,22 +102,12 @@
                             </div>
                         </div>
 
-
-                        <!-- <div class="flex items-center">
-                            <div class="flex items-center h-5">
-                                <input id="remember-me" name="remember-me" type="checkbox" v-model="rememberMe"
-                                    class="h-4 w-4 text-emerald-600 focus:ring-emerald-500 border-gray-300 rounded" />
-                            </div>
-                            <div class="ml-2 text-sm">
-                                <label for="remember-me" class="font-medium text-gray-700">Remember me</label>
-                            </div>
-                        </div> -->
                         <div v-show="props.loginError" class="text-sm text-red-600 p-2">
                             Invalid password or email
                         </div>
                         <div>
                             <button type="submit"
-                                class="w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-emerald-600 hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500 transition-colors"
+                                class="w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-black hover:bg-zinc-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black transition-all duration-300 active:scale-95"
                                 :disabled="isLoading">
                                 <span v-if="isLoading" class="flex items-center">
                                     <svg class="animate-spin -ml-1 mr-2 h-4 w-4 text-white"
@@ -137,13 +124,6 @@
                             </button>
                         </div>
                     </form>
-
-                    <!-- <div class="mt-6 text-center text-sm">
-                        <span class="text-gray-500">Don't have an account?</span>
-                        <a href="#" class="ml-1 font-medium text-emerald-600 hover:text-emerald-500 transition-colors">
-                            Create one now
-                        </a>
-                    </div> -->
                 </div>
             </div>
         </div>

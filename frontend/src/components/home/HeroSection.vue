@@ -15,12 +15,12 @@
           <div class="pt-10 sm:pt-16 lg:pt-8 xl:pt-16">
             <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
               <div class="sm:text-center lg:text-left">
-                <h1 class="text-4xl tracking-tight font-extrabold text-gray-900 sm:text-5xl md:text-6xl">
+                <h1 class="text-4xl tracking-tight font-extrabold text-zinc-900 sm:text-5xl md:text-6xl">
                   <span class="block xl:inline">Modern inventory</span>
-                  <span class="block text-emerald-600 xl:inline"> for your station</span>
+                  <span class="block text-black xl:inline"> for your station</span>
                 </h1>
                 <p
-                  class="mt-3 text-base text-gray-500 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0"
+                  class="mt-3 text-base text-zinc-500 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0"
                 >
                   Streamline your gasoline station operations with our comprehensive inventory management system. Track
                   fuel levels, manage stock, and generate reports with ease.
@@ -29,7 +29,7 @@
                   <div class="rounded-md shadow">
                     <button
                       @click="$emit('open-login')"
-                      class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-emerald-600 hover:bg-emerald-700 md:py-4 md:text-lg md:px-10 transition-colors"
+                      class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-black hover:bg-zinc-800 md:py-4 md:text-lg md:px-10 transition-all duration-300 active:scale-95"
                     >
                       Get started
                     </button>
@@ -37,7 +37,7 @@
                   <div class="mt-3 sm:mt-0 sm:ml-3">
                     <a
                       href="#features"
-                      class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-emerald-700 bg-emerald-100 hover:bg-emerald-200 md:py-4 md:text-lg md:px-10 transition-colors"
+                      class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-zinc-900 bg-zinc-100 hover:bg-zinc-200 md:py-4 md:text-lg md:px-10 transition-all duration-300 active:scale-95"
                     >
                       Learn more
                     </a>
@@ -56,8 +56,8 @@
         />
       </div>
     </section>
-  </template>
+</template>
   
-  <script setup lang="ts">
-  defineEmits(['open-login']);
-  </script>
+<script setup lang="ts">
+defineEmits(['open-login']);
+</script>

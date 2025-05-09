@@ -5,26 +5,24 @@
 
                 <div class="flex items-center">
                     <div class="flex-shrink-0 flex items-center">
-                        <LogoIcon class="h-8 w-8 text-emerald-600" />
-                        <span class="ml-2 text-xl font-bold text-gray-900">BAITRACK</span>
+                        <LogoIcon class="h-8 w-8 text-black" />
+                        <span class="ml-2 text-xl font-bold text-zinc-900">BAITRACK</span>
                     </div>
                 </div>
 
-
                 <div class="flex items-center md:hidden">
                     <button @click="isMenuOpen = !isMenuOpen"
-                        class="inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:text-gray-900 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-emerald-500">
+                        class="inline-flex items-center justify-center p-2 rounded-md text-zinc-700 hover:text-zinc-900 hover:bg-zinc-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-black transition-all duration-300 active:scale-95">
                         <span class="sr-only">Open main menu</span>
                         <MenuIcon v-if="!isMenuOpen" class="block h-6 w-6" />
                         <XIcon v-else class="block h-6 w-6" />
                     </button>
                 </div>
 
-
                 <nav class="hidden md:flex md:items-center md:space-x-6">
-                    <!-- <a href="#features" class="text-base font-medium text-gray-700 hover:text-gray-900">Features</a> -->
+                    <!-- <a href="#features" class="text-base font-medium text-zinc-700 hover:text-zinc-900">Features</a> -->
                     <button @click="$emit('open-login')"
-                        class="ml-4 px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-emerald-600 hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500 transition-colors">
+                        class="ml-4 px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-black hover:bg-zinc-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black transition-all duration-300 active:scale-95">
                         LOGIN
                     </button>
                 </nav>
@@ -34,9 +32,9 @@
         <div class="md:hidden" v-show="isMenuOpen">
             <div class="pt-2 pb-3 space-y-1 px-4 sm:px-6">
                 <!-- <a href="#features"
-                    class="block py-2 text-base font-medium text-gray-700 hover:text-gray-900">Features</a> -->
+                    class="block py-2 text-base font-medium text-zinc-700 hover:text-zinc-900">Features</a> -->
                 <button @click="$emit('open-login')"
-                    class="mt-2 w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-emerald-600 hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500 transition-colors">
+                    class="mt-2 w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-black hover:bg-zinc-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black transition-all duration-300 active:scale-95">
                     LOGIN
                 </button>
             </div>

@@ -26,7 +26,7 @@ import { useAuthStore } from '@/stores'
 
 router.beforeEach(async (to, from, next) => {
   const authStore = useAuthStore()
-  await authStore.checkAuth()
+ 
   if (to.meta.requiresAuth && !authStore.isAuthenticated) {
     next({ name: 'home' })
   } else {

@@ -2,11 +2,11 @@
     <section id="features" class="py-12 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="lg:text-center">
-                <h2 class="text-base text-emerald-600 font-semibold tracking-wide uppercase">Features</h2>
-                <p class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+                <h2 class="text-base text-black font-semibold tracking-wide uppercase">Features</h2>
+                <p class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-zinc-900 sm:text-4xl">
                     Everything you need to manage your station
                 </p>
-                <p class="mt-4 max-w-2xl text-xl text-gray-500 lg:mx-auto">
+                <p class="mt-4 max-w-2xl text-xl text-zinc-500 lg:mx-auto">
                     Our system provides comprehensive tools to manage your gasoline station inventory efficiently.
                 </p>
             </div>
@@ -24,7 +24,6 @@
 <script setup lang="ts">
 import FeatureCard from './FeatureCard.vue';
 import { h, defineComponent } from 'vue';
-
 
 const ChartIcon = defineComponent({
     render() {
@@ -97,7 +96,6 @@ const DocumentIcon = defineComponent({
         ]);
     }
 });
-
 
 const features = [
     {

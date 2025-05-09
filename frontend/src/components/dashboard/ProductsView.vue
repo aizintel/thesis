@@ -1,9 +1,9 @@
 <template>
     <div>
         <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
-            <h1 class="text-xl md:text-2xl font-bold text-gray-900">Products</h1>
+            <h1 class="text-xl md:text-2xl font-bold text-zinc-900">Products</h1>
             <button @click="$emit('open-add-item-modal')"
-                class="inline-flex items-center justify-center px-4 py-2 text-sm font-medium text-white bg-emerald-600 rounded-lg shadow-sm hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 transition-colors">
+                class="inline-flex items-center justify-center px-4 py-2 text-sm font-medium text-white bg-black rounded-lg shadow-sm hover:bg-zinc-800 focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-2 transition-all duration-300 active:scale-95">
                 <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 mr-2" fill="none" stroke="currentColor"
                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
                     <path d="M12 5v14" />
@@ -16,40 +16,39 @@
         <!-- Card View for Mobile -->
         <div class="block sm:hidden space-y-3">
             <div v-for="(item, index) in productInventory" :key="`mobile-${index}`"
-                class="bg-white rounded-xl shadow-sm border border-gray-100 p-4">
+                class="bg-white rounded-xl shadow-md border border-zinc-200 p-4 transition-all duration-300 hover:shadow-lg">
                 <div class="flex items-center mb-3">
-                    <div class="h-10 w-10 bg-emerald-50 rounded-lg flex items-center justify-center flex-shrink-0">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-emerald-500" fill="none"
+                    <div class="h-10 w-10 bg-black rounded-lg flex items-center justify-center flex-shrink-0">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" fill="none"
                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                             viewBox="0 0 24 24">
                             <path d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
                         </svg>
                     </div>
                     <div class="ml-3">
-                        <div class="text-sm font-medium text-gray-900">{{ item.name }}</div>
-                        <div class="text-xs text-gray-500">SKU: {{ item.sku }}</div>
+                        <div class="text-sm font-medium text-zinc-900">{{ item.name }}</div>
+                        <div class="text-xs text-zinc-500">SKU: {{ item.sku }}</div>
                     </div>
                 </div>
 
                 <div class="grid grid-cols-2 gap-y-2 text-xs mb-3">
-                    <div class="text-gray-500">Category:</div>
-                    <div class="text-gray-900">{{ item.category }}</div>
+                    <div class="text-zinc-500">Category:</div>
+                    <div class="text-zinc-900">{{ item.category }}</div>
 
-                    <div class="text-gray-500">Stock:</div>
-                    <div class="text-gray-900">
+                    <div class="text-zinc-500">Stock:</div>
+                    <div class="text-zinc-900">
                         {{ item.stock }} units
-                        <div class="w-full bg-gray-100 rounded-full h-1.5 mt-1">
-                            <div class="h-1.5 rounded-full bg-emerald-500"
+                        <div class="w-full bg-zinc-100 rounded-full h-1.5 mt-1">
+                            <div class="h-1.5 rounded-full bg-black"
                                 :style="`width: ${Math.min(100, (item.stock / 50) * 100)}%`"></div>
                         </div>
                     </div>
 
-                    <div class="text-gray-500">Price:</div>
-                    <div class="text-gray-900">₱{{ item.price.toFixed(2) }}</div>
+                    <div class="text-zinc-500">Price:</div>
+                    <div class="text-zinc-900">₱{{ item.price.toFixed(2) }}</div>
 
-                    <div class="text-gray-500">Status:</div>
+                    <div class="text-zinc-500">Status:</div>
                     <div>
-                        <!-- Updated to use getStockStatus function -->
                         <span :class="[
                             'px-2 py-0.5 inline-flex items-center gap-1 text-xs font-semibold rounded-full',
                             getStockStatus(item.stock).class
@@ -64,9 +63,9 @@
                     </div>
                 </div>
 
-                <div class="flex justify-between mt-2 pt-2 border-t border-gray-100">
+                <div class="flex justify-between mt-2 pt-2 border-t border-zinc-100">
                     <button @click="$emit('edit-item', item, item.id)"
-                        class="inline-flex items-center px-3 py-1.5 text-xs font-medium text-emerald-700 bg-emerald-50 rounded-md hover:bg-emerald-100">
+                        class="inline-flex items-center px-3 py-1.5 text-xs font-medium text-black bg-zinc-100 rounded-md hover:bg-zinc-200 transition-all duration-300 active:scale-95">
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5 mr-1.5" viewBox="0 0 24 24"
                             fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                             stroke-linejoin="round">
@@ -76,7 +75,7 @@
                         Edit
                     </button>
                     <button @click="$emit('confirm-delete-product', item)"
-                        class="inline-flex items-center px-3 py-1.5 text-xs font-medium text-red-700 bg-red-50 rounded-md hover:bg-red-100">
+                        class="inline-flex items-center px-3 py-1.5 text-xs font-medium text-red-700 bg-red-50 rounded-md hover:bg-red-100 transition-all duration-300 active:scale-95">
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5 mr-1.5" viewBox="0 0 24 24"
                             fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                             stroke-linejoin="round">
@@ -91,54 +90,54 @@
         </div>
 
         <!-- Table View with Horizontal Scroll for Tablet/Desktop -->
-        <div class="hidden sm:block bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+        <div class="hidden sm:block bg-white rounded-xl shadow-md border border-zinc-200 overflow-hidden transition-all duration-300 hover:shadow-lg">
             <div class="overflow-x-auto">
-                <table class="min-w-full divide-y divide-gray-200">
-                    <thead class="bg-gray-50">
+                <table class="min-w-full divide-y divide-zinc-200">
+                    <thead class="bg-zinc-50">
                         <tr>
-                            <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            <th class="px-4 py-3 text-left text-xs font-medium text-zinc-500 uppercase tracking-wider">
                                 Product</th>
-                            <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            <th class="px-4 py-3 text-left text-xs font-medium text-zinc-500 uppercase tracking-wider">
                                 Category</th>
-                            <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            <th class="px-4 py-3 text-left text-xs font-medium text-zinc-500 uppercase tracking-wider">
                                 Stock</th>
-                            <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            <th class="px-4 py-3 text-left text-xs font-medium text-zinc-500 uppercase tracking-wider">
                                 Price</th>
-                            <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            <th class="px-4 py-3 text-left text-xs font-medium text-zinc-500 uppercase tracking-wider">
                                 Status</th>
                             <th class="relative px-4 py-3"><span class="sr-only">Actions</span></th>
                         </tr>
                     </thead>
-                    <tbody class="bg-white divide-y divide-gray-100">
+                    <tbody class="bg-white divide-y divide-zinc-100">
                         <tr v-for="(item, index) in productInventory" :key="`desktop-${index}`"
-                            class="hover:bg-gray-50 transition-colors">
+                            class="hover:bg-zinc-50 transition-colors">
                             <td class="px-4 py-4 whitespace-nowrap">
                                 <div class="flex items-center">
                                     <div
-                                        class="h-10 w-10 bg-emerald-50 rounded-lg flex items-center justify-center flex-shrink-0">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-emerald-500"
+                                        class="h-10 w-10 bg-black rounded-lg flex items-center justify-center flex-shrink-0">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white"
                                             fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                             stroke-linejoin="round" viewBox="0 0 24 24">
                                             <path d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
                                         </svg>
                                     </div>
                                     <div class="ml-4">
-                                        <div class="text-sm font-medium text-gray-900">{{ item.name }}</div>
-                                        <div class="text-xs text-gray-500">SKU: {{ item.sku }}</div>
+                                        <div class="text-sm font-medium text-zinc-900">{{ item.name }}</div>
+                                        <div class="text-xs text-zinc-500">SKU: {{ item.sku }}</div>
                                     </div>
                                 </div>
                             </td>
                             <td class="px-4 py-4 whitespace-nowrap">
-                                <div class="text-sm text-gray-900">{{ item.category }}</div>
+                                <div class="text-sm text-zinc-900">{{ item.category }}</div>
                             </td>
                             <td class="px-4 py-4 whitespace-nowrap">
-                                <div class="text-sm text-gray-900">{{ item.stock }} units</div>
-                                <div class="w-24 bg-gray-100 rounded-full h-1.5 mt-1.5">
-                                    <div class="h-1.5 rounded-full bg-emerald-500"
+                                <div class="text-sm text-zinc-900">{{ item.stock }} units</div>
+                                <div class="w-24 bg-zinc-100 rounded-full h-1.5 mt-1.5">
+                                    <div class="h-1.5 rounded-full bg-black"
                                         :style="`width: ${Math.min(100, (item.stock / 50) * 100)}%`"></div>
                                 </div>
                             </td>
-                            <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-500">
+                            <td class="px-4 py-4 whitespace-nowrap text-sm text-zinc-500">
                                 ${{ item.price.toFixed(2) }}
                             </td>
                             <td class="px-4 py-4 whitespace-nowrap">
@@ -153,14 +152,13 @@
                                     </svg>
                                     {{ getStockStatus(item.stock).label }}
                                 </span>
-
                             </td>
                             <td class="px-4 py-4 whitespace-nowrap text-right text-sm font-medium">
                                 <div class="flex justify-end space-x-3">
                                     <button @click="$emit('edit-item', item, item.id)"
-                                        class="text-emerald-600 hover:text-emerald-900 transition-colors">Edit</button>
+                                        class="text-black hover:text-zinc-700 transition-colors">Edit</button>
                                     <button @click="$emit('confirm-delete-product', item)"
-                                        class="text-emerald-600 hover:text-red-900 transition-colors">Delete</button>
+                                        class="text-black hover:text-red-700 transition-colors">Delete</button>
                                 </div>
                             </td>
                         </tr>
@@ -181,13 +179,13 @@ function getStockStatus(stock: number) {
     if (stock > 20) {
         return {
             label: 'In Stock',
-            class: 'bg-emerald-100 text-emerald-800',
+            class: 'bg-black text-white',
             showIcon: true
         };
     } else if (stock > 5) {
         return {
             label: 'Low Stock',
-            class: 'bg-amber-100 text-amber-800',
+            class: 'bg-zinc-200 text-zinc-800',
             showIcon: true
         };
     } else if (stock > 0) {
@@ -199,7 +197,7 @@ function getStockStatus(stock: number) {
     } else {
         return {
             label: 'Out of Stock',
-            class: 'bg-gray-100 text-gray-800',
+            class: 'bg-zinc-200 text-zinc-800',
             showIcon: false
         };
     }

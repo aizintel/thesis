@@ -18,11 +18,11 @@ export const signIn = async (req: Request, res: Response): Promise<void> => {
       return;
     }
 
-    const token = generateToken(user.id);
+    const token = await generateToken(user.id);
 
     res.cookie("token", token, {
       httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
+      secure: true,
       maxAge: 3600 * 1000,
       sameSite: "none",
       path: "/",
@@ -37,6 +37,7 @@ export const signIn = async (req: Request, res: Response): Promise<void> => {
         token: token,
       },
     });
+    return;
   } catch (error) {
     console.error("Sign up error:", error);
     res.status(500).json({ data: { error: "Internal server error." } });
@@ -50,6 +51,7 @@ export const logout = async (req: Request, res: Response): Promise<void> => {
     res
       .status(400)
       .json({ data: { message: "No active session to log out from" } });
+    return;
   }
 
   res.clearCookie("token", {
@@ -64,17 +66,23 @@ export const logout = async (req: Request, res: Response): Promise<void> => {
       message: "Logged out successfully",
     },
   });
+
+  return;
 };
 
 export const checkAuth = async (req: Request, res: Response): Promise<void> => {
   try {
     const token = req.cookies?.token;
-    if (!token) res.status(400).json({ data: { error: "No token provided." } });
+    if (!token) {
+      res.status(400).json({ data: { error: "No token provided." } });
+      return;
+    }
 
     const { id }: any = decodeToken(token);
     const user: any = getInfoById(id);
     if (!user?.id) res.status(400).json({ data: { error: "Invalid token." } });
     res.status(200).json({ data: { ...user, token } });
+    return;
   } catch (error) {
     console.error("CheckAuth error:", error);
     res.status(500).json({ data: { error: "Internal server error." } });

@@ -1,5 +1,5 @@
 <template>
-  <div class="min-h-screen bg-gray-50">
+  <div class="min-h-screen bg-zinc-50">
     <!-- Header Component -->
     <TheHeader @open-login="showLoginModal = true" />
 
@@ -38,9 +38,7 @@ const handleLogin = async (credentials: { email: string, password: string }) => 
   if (authStore.user) {
   router.push("/dashboard")
   } else {
-
     loginError.value = true;
   }
-
 };
 </script>
