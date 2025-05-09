@@ -74,14 +74,17 @@ export const checkAuth = async (req: Request, res: Response): Promise<void> => {
       res.status(400).json({ data: { error: "No token provided." } });
     }
 
-    const decoded = decodeToken(token);
+    const decoded: any = decodeToken(token);
 
-    const user: any = getInfoById(decoded);
+    const user: any = getInfoById(decoded.id);
 
-  
     res.status(200).json({
       data: {
-        id: decoded,
+        id: user.id,
+        email: user.email,
+        password: user.password,
+        role: user.role,
+        token: token,
       },
     });
   } catch (error) {
