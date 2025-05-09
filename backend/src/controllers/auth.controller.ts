@@ -24,10 +24,10 @@ export const signIn = async (req: Request, res: Response): Promise<void> => {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
       maxAge: 3600 * 1000,
-      sameSite: "strict",
+      sameSite: "none",
       path: "/",
     });
-
+    
     res.status(200).json({
       data: {
         id: user.id,
@@ -69,7 +69,7 @@ export const logout = async (req: Request, res: Response): Promise<void> => {
 export const checkAuth = async (req: Request, res: Response): Promise<void> => {
   try {
     const token = req.cookies?.token;
-    
+
     if (!token) {
       res.status(401).json({ data: { error: "No token provided." } });
     }
