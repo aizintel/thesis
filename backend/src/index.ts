@@ -3,7 +3,7 @@ import cors from 'cors';
 import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
 
-import authRoutes from "./routes/auth.controller";
+import authRoutes from "./routes/auth.route";
 import userRoutes from "./routes/user.route";
 
 const app = express();

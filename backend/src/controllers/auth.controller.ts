@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
-import generateToken from "../utils/authUtils";
-import { check } from "../config/services/auth.service";
+import { generateToken, decodeToken } from "../utils/authUtils";
+import { getInfoByEmail, getInfoById } from "../config/services/auth.service";
 
 export const signIn = async (req: Request, res: Response): Promise<void> => {
   try {
@@ -11,7 +11,7 @@ export const signIn = async (req: Request, res: Response): Promise<void> => {
       return;
     }
 
-    const user: any = check(email);
+    const user: any = getInfoByEmail(email);
 
     if (!user || user.password !== password) {
       res.status(400).json({ data: { error: "Invalid email or password." } });
@@ -64,4 +64,35 @@ export const logout = async (req: Request, res: Response): Promise<void> => {
       message: "Logged out successfully",
     },
   });
+};
+
+export const checkAuth = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const token = req.cookies?.token;
+    
+    if (!token) {
+      res.status(401).json({ data: { error: "No token provided." } });
+    }
+
+    const decoded = decodeToken(token);
+
+    if (!decoded) {
+      res.status(401).json({ data: { error: "Invalid or expired token." } });
+    }
+
+    const user: any = getInfoById(token);
+
+    res.status(200).json({
+      data: {
+        id: user.id,
+        email: user.email,
+        password: user.password,
+        role: user.role,
+        token: token,
+      },
+    });
+  } catch (error) {
+    console.error("CheckAuth error:", error);
+    res.status(500).json({ data: { error: "Internal server error." } });
+  }
 };

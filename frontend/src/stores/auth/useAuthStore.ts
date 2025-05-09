@@ -7,6 +7,7 @@ export const useAuthStore = defineStore('auth', () => {
   const token = ref<string | null>(localStorage.getItem('access_token'))
   const loading = ref(false)
   const error = ref<string | null>(null)
+  const alreadyChecked  = ref(false)
 
   const isAuthenticated = computed(() => !!token.value)
 
@@ -27,6 +28,32 @@ export const useAuthStore = defineStore('auth', () => {
       loading.value = false
     }
   }
+
+  
+
+  async function checkAuth(): Promise<boolean> {
+    if (alreadyChecked.value) return isAuthenticated.value
+
+    const storedToken = localStorage.getItem('access_token')
+    if (!storedToken) {
+      logout()
+      alreadyChecked.value = true
+      return false
+    }
+
+    try {
+      const { user: profile } = await authService.check()
+      user.value = profile
+      token.value = storedToken
+      alreadyChecked.value = true
+      return true
+    } catch {
+      logout()
+      alreadyChecked.value = true
+      return false
+    }
+  }
+
 
   async function logout() {
     try {

@@ -7,4 +7,12 @@ const generateToken = (id: string): string => {
   return jwt.sign({ id }, JWT_SECRET, { expiresIn: TOKEN_EXPIRY });
 };
 
-export default generateToken;
+const decodeToken = (token: string) => {
+  try {
+    return jwt.verify(token, JWT_SECRET); 
+  } catch (err) {
+    return null;
+  }
+};
+
+export { generateToken, decodeToken };
