@@ -6,9 +6,7 @@ export const useAuthStore = defineStore('auth', () => {
   const user = ref<UserProfile | null>(null)
   const token = ref<string | null>(localStorage.getItem('access_token'))
   const loading = ref(false)
-  const error = ref<string | null>(null)
-  const alreadyChecked  = ref(false)
-
+  const error = ref<string | null>(null);
   const isAuthenticated = computed(() => !!token.value)
 
   async function login(email: string, password: string) {
@@ -16,8 +14,8 @@ export const useAuthStore = defineStore('auth', () => {
     error.value = null
     try {
       const data = await authService.login({ email, password })
-      user.value = data;
-      token.value = data.token;
+      user.value = data
+      token.value = data.token
       localStorage.setItem('access_token', data.token)
     } catch (err: any) {
       error.value = extractErrorMessage(err)
@@ -29,15 +27,10 @@ export const useAuthStore = defineStore('auth', () => {
     }
   }
 
-  
-
   async function checkAuth(): Promise<boolean> {
-    if (alreadyChecked.value) return isAuthenticated.value
-
     const storedToken = localStorage.getItem('access_token')
     if (!storedToken) {
       logout()
-      alreadyChecked.value = true
       return false
     }
 
@@ -45,15 +38,14 @@ export const useAuthStore = defineStore('auth', () => {
       const { user: profile } = await authService.check()
       user.value = profile
       token.value = storedToken
-      alreadyChecked.value = true
+
+      console.log(user.value)
       return true
     } catch {
       logout()
-      alreadyChecked.value = true
       return false
     }
   }
-
 
   async function logout() {
     try {
@@ -77,6 +69,8 @@ export const useAuthStore = defineStore('auth', () => {
     loading,
     error,
     isAuthenticated,
+
+    checkAuth,
     login,
     logout,
   }
