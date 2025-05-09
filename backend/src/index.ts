@@ -14,7 +14,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cookieParser());
 
-const allowedOrigins = ['http://localhost:3000', 'https://jeffanians-baitrack.vercel.app'];
+const allowedOrigins = ['http://localhost:3000', 'https://jeffanians-baitrack.vercel.app', '*'];
 
 app.use(cors({
   origin: function (origin, callback) {
