@@ -69,22 +69,12 @@ export const logout = async (req: Request, res: Response): Promise<void> => {
 export const checkAuth = async (req: Request, res: Response): Promise<void> => {
   try {
     const token = req.cookies?.token;
+    if (!token) res.status(400).json({ data: { error: "No token provided." } });
 
-    if (!token) {
-      res.status(400).json({ data: { error: "No token provided." } });
-    }
-
-    const user: any = getInfoById(decodeToken(token));
-
-    res.status(200).json({
-      data: {
-        id: user.id,
-        email: user.email,
-        password: user.password,
-        role: user.role,
-        token: token,
-      },
-    });
+    const { id }: any = decodeToken(token);
+    const user: any = getInfoById(id);
+    if (!user?.id) res.status(400).json({ data: { error: "Invalid token." } });
+    res.status(200).json({ data: { ...user, token } });
   } catch (error) {
     console.error("CheckAuth error:", error);
     res.status(500).json({ data: { error: "Internal server error." } });
