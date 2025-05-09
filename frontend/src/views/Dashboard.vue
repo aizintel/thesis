@@ -106,6 +106,8 @@ import ProductsView from '@/components/dashboard/product/ProductsView.vue';
 import UsersView from '@/components/dashboard/user/UsersView.vue';
 import AddEditModal from '@/components/dashboard/AddEditModal.vue';
 import DeleteConfirmationModal from '@/components/dashboard/DeleteConfirmationModal.vue';
+import AnalyticsDashboard from '@/components/dashboard/analytics/analyticsView.vue';
+import ReportsDashboard from '@/components/dashboard/reports/reportsView.vue';
 
 // Pinia
 import { useUserStore, useAuthStore } from '@/stores';
@@ -168,6 +170,17 @@ interface UserFormData {
     password: string;
 }
 
+interface Report {
+    id: string;
+    product: string;
+    productId: string;
+    reportedBy: string;
+    email: string;
+    issueType: string;
+    description: string;
+    date: any;
+    status: string;
+}
 
 interface ReportFormData {
     product: string;
@@ -177,6 +190,7 @@ interface ReportFormData {
     issueType: string;
     description: string;
     date: string;
+    status: string;
 }
 
 const sidebarOpen = ref<boolean>(false);
@@ -215,27 +229,12 @@ const reportFormData = reactive<ReportFormData>({
     issueType: '',
     description: '',
     date: '',
-    status: '',
+    status: ''
 })
 
 
 const loading = ref(false);
 
-import AnalyticsDashboard from '@/components/dashboard/analytics/analyticsView.vue';
-
-import ReportsDashboard from '@/components/dashboard/reports/reportsView.vue';
-
-interface Report {
-    id: string;
-    product: string;
-    productId: string;
-    reportedBy: string;
-    email: string;
-    issueType: string;
-    description: string;
-    date: Date;
-    status: string;
-}
 
 interface Filters {
     status: string;
@@ -254,7 +253,7 @@ const reports = ref<Report[]>([
         email: 'john.smith@example.com',
         issueType: 'Defective Product',
         description: 'The right earphone stopped working after 2 days of use. I\'ve tried resetting and recharging but the issue persists.',
-        date: new Date('2023-05-10T14:30:00'),
+        date: '2023-05-10T14:30:00',
         status: 'Pending',
     },
     {
@@ -265,7 +264,7 @@ const reports = ref<Report[]>([
         email: 'emily.j@example.com',
         issueType: 'Wrong Item Received',
         description: 'I ordered the black Smart Watch Pro but received the silver model instead.',
-        date: new Date('2023-05-08T09:15:00'),
+        date: '2023-05-08T09:15:00',
         status: 'In Progress',
     },
 ]);
@@ -280,7 +279,7 @@ const updateFilters = (newFilters: Filters): void => {
     filters.value = { ...filters.value, ...newFilters };
 };
 
-const submitReport = (reportData: ReportFormData): void => {
+const submitReport = (reportData: any): any => {
     const newId = (reports.value.length + 1).toString();
 
     const newReport: Report = {
@@ -447,8 +446,8 @@ const handleExportData = () => {
 
 };
 
-const handleViewDetails = (metric: any, id: string) => {
-    console.log('Viewing details for:', metric.name, 'ID:', id);
+const handleViewDetails = () => {
+    
 
 };
 

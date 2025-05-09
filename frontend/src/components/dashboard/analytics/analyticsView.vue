@@ -189,16 +189,7 @@ import SalesGraph from '@/components/dashboard/analytics/sales-graph.vue';
 import MiniGraph from '@/components/dashboard/analytics/mini-graph.vue';
 
 defineProps<{
-  metrics: {
-    id: string;
-    name: string;
-    icon: string;
-    current: string;
-    previous: string;
-    change: string;
-    trend: 'up' | 'down';
-    graphData: number[];
-  }[];
+  metrics: any;
   graphData: {
     labels: string[];
     datasets: {
