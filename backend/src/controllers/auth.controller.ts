@@ -18,13 +18,15 @@ export const signIn = async (req: Request, res: Response): Promise<void> => {
       return;
     }
 
-    const token = await generateToken(user.id);
+    const token = generateToken(user.id);
+
+    const isProduction = process.env.NODE_ENV === "production";
 
     res.cookie("token", token, {
       httpOnly: true,
-      secure: true,
+      secure: isProduction, // true only in production
       maxAge: 3600 * 1000,
-      sameSite: "none",
+      sameSite: isProduction ? "none" : "lax", // 'none' needs secure=true
       path: "/",
     });
 
