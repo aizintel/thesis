@@ -27,7 +27,7 @@ export const signIn = async (req: Request, res: Response): Promise<void> => {
       sameSite: "none",
       path: "/",
     });
-    
+
     res.status(200).json({
       data: {
         id: user.id,
@@ -74,9 +74,10 @@ export const checkAuth = async (req: Request, res: Response): Promise<void> => {
       res.status(400).json({ data: { error: "No token provided." } });
     }
 
-    const decoded: any = decodeToken(token);
+    const user: any = getInfoById(decodeToken(token));
 
-    const user: any = getInfoById(decoded.id);
+    if (!user.id)
+      res.status(400).json({ data: { error: "Token is invalid or expired." } });
 
     res.status(200).json({
       data: {

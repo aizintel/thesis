@@ -35,8 +35,8 @@ export const useAuthStore = defineStore('auth', () => {
     }
 
     try {
-      const { user: profile } = await authService.check()
-      user.value = profile;
+      const data = await authService.check()
+      user.value = data;
       token.value = storedToken;
       return true
     } catch {
