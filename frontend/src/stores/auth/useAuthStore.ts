@@ -36,13 +36,12 @@ export const useAuthStore = defineStore('auth', () => {
 
     try {
       const { user: profile } = await authService.check()
-      user.value = profile
-      token.value = storedToken
-
-      console.log(user.value)
+      user.value = profile;
+      token.value = storedToken;
       return true
     } catch {
-      logout()
+      logout();
+      token.value = null;
       return false;
     }
   }
