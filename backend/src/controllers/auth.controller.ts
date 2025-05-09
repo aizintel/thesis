@@ -76,13 +76,9 @@ export const checkAuth = async (req: Request, res: Response): Promise<void> => {
 
     const decoded = decodeToken(token);
 
-    if (!decoded) {
-      res.status(400).json({ data: { error: "Invalid or expired token." } });
-    }
+    const user: any = getInfoById(decoded);
 
-    const user: any = getInfoById(token);
-
-
+  
     res.status(200).json({
       data: {
         id: user.id,

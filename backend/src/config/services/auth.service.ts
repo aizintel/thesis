@@ -23,7 +23,7 @@ export function getInfoByEmail(email?: string): Auth | ErrorResponse {
   }
 }
 
-export function getInfoById(id?: string): Auth | ErrorResponse {
+export function getInfoById(id: any): Auth | ErrorResponse {
   try {
     const user: any = db
       .prepare("SELECT * FROM users WHERE id = ?")
