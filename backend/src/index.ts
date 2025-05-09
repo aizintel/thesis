@@ -14,10 +14,19 @@ app.use(express.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cookieParser());
 
+const allowedOrigins = ['http://localhost:3000', 'https://jeffanians-baitrack.vercel.app'];
+
 app.use(cors({
-    origin: true,
-    credentials: true 
-  }));
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true
+}));
+
 
 app.use("/api/auth", authRoutes);
 app.use("/api/user", userRoutes);
