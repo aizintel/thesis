@@ -76,9 +76,6 @@ export const checkAuth = async (req: Request, res: Response): Promise<void> => {
 
     const user: any = getInfoById(decodeToken(token));
 
-    if (!user.id)
-      res.status(400).json({ data: { error: "Token is invalid or expired." } });
-
     res.status(200).json({
       data: {
         id: user.id,
