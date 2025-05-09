@@ -106,7 +106,7 @@
                         </div>
 
 
-                        <div class="flex items-center">
+                        <!-- <div class="flex items-center">
                             <div class="flex items-center h-5">
                                 <input id="remember-me" name="remember-me" type="checkbox" v-model="rememberMe"
                                     class="h-4 w-4 text-emerald-600 focus:ring-emerald-500 border-gray-300 rounded" />
@@ -114,9 +114,10 @@
                             <div class="ml-2 text-sm">
                                 <label for="remember-me" class="font-medium text-gray-700">Remember me</label>
                             </div>
+                        </div> -->
+                        <div v-show="props.loginError" class="text-sm text-red-600 p-2">
+                            Invalid password or email
                         </div>
-
-
                         <div>
                             <button type="submit"
                                 class="w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-emerald-600 hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500 transition-colors"
@@ -136,6 +137,7 @@
                             </button>
                         </div>
                     </form>
+
                     <!-- <div class="mt-6 text-center text-sm">
                         <span class="text-gray-500">Don't have an account?</span>
                         <a href="#" class="ml-1 font-medium text-emerald-600 hover:text-emerald-500 transition-colors">
@@ -149,29 +151,37 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, watch } from 'vue';
+
+const props = defineProps<{
+    loginError: boolean
+}>();
+
+const emit = defineEmits(['close', 'login']);
 
 const email = ref('');
 const password = ref('');
-const rememberMe = ref(false);
 const isLoading = ref(false);
 const showPassword = ref(false);
+
+watch(() => props.loginError, (newVal) => {
+    console.log(props.loginError)
+    if (!newVal) {
+        email.value = '';
+        password.value = '';
+    }
+});
 
 const handleSubmit = () => {
     isLoading.value = true;
 
-
     setTimeout(() => {
         isLoading.value = false;
-
 
         emit('login', {
             email: email.value,
             password: password.value,
-            remember: rememberMe.value
         });
     }, 1000);
 };
-
-const emit = defineEmits(['close', 'login']);
 </script>

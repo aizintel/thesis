@@ -1,8 +1,8 @@
 import { Request, Response } from "express";
-import generateToken, { Auth } from "../utils/authUtils";
+import generateToken from "../utils/authUtils";
 import { check } from "../config/services/auth.service";
 
-export const signUp = async (req: Request, res: Response): Promise<void> => {
+export const signIn = async (req: Request, res: Response): Promise<void> => {
   try {
     const { email, password } = req.body;
 
@@ -18,12 +18,23 @@ export const signUp = async (req: Request, res: Response): Promise<void> => {
       return;
     }
 
+    const token = generateToken(user.id);
+
+    res.cookie("token", token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      maxAge: 3600 * 1000,
+      sameSite: "strict",
+      path: "/",
+    });
+
     res.status(200).json({
       data: {
         id: user.id,
         email: user.email,
         password: user.password,
         role: user.role,
+        token: token,
       },
     });
   } catch (error) {
@@ -33,5 +44,24 @@ export const signUp = async (req: Request, res: Response): Promise<void> => {
 };
 
 export const logout = async (req: Request, res: Response): Promise<void> => {
-  // Implementation pending
+  const token = req.cookies?.token;
+
+  if (!token) {
+    res
+      .status(400)
+      .json({ data: { message: "No active session to log out from" } });
+  }
+
+  res.clearCookie("token", {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
+    sameSite: "strict",
+    path: "/",
+  });
+
+  res.status(200).json({
+    data: {
+      message: "Logged out successfully",
+    },
+  });
 };

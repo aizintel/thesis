@@ -10,7 +10,7 @@
     <FeaturesSection />
 
     <!-- Login Modal Component -->
-    <LoginModal v-if="showLoginModal" @close="showLoginModal = false" @login="handleLogin" />
+    <LoginModal v-if="showLoginModal" @close="showLoginModal = false" @login="handleLogin" :loginError="loginError" />
   </div>
 </template>
 
@@ -22,11 +22,25 @@ import HeroSection from '@/components/home/HeroSection.vue';
 import FeaturesSection from '@/components/home/FeaturesSection.vue';
 import LoginModal from '@/components/home/LoginModal.vue';
 
+import { useAuthStore } from '@/stores';
+
+const authStore = useAuthStore();
+
 const router = useRouter();
 const showLoginModal = ref(false);
+const loginError = ref(false);
 
-const handleLogin = (credentials: { email: string, password: string, remember: boolean }) => {
+const handleLogin = async (credentials: { email: string, password: string }) => {
   console.log('Login with:', credentials);
-  router.push('/dashboard');
+
+  const login = await authStore.login(credentials.email, credentials.password);
+
+  if (authStore.user) {
+  router.push("/dashboard")
+  } else {
+
+    loginError.value = true;
+  }
+
 };
 </script>

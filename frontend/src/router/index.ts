@@ -12,6 +12,7 @@ const router = createRouter({
       path: '/dashboard',
       name: 'dashboard',
       component: () => import('@/views/Dashboard.vue'),
+      meta: { requiresAuth: true }, 
     },
     {
       path: '/sign-up',
@@ -20,5 +21,17 @@ const router = createRouter({
     },
   ],
 })
+
+import { useAuthStore } from '@/stores'
+
+router.beforeEach((to, from, next) => {
+  const authStore = useAuthStore()
+  if (to.meta.requiresAuth && !authStore.isAuthenticated) {
+    next({ name: 'home' })
+  } else {
+    next()
+  }
+});
+
 
 export default router

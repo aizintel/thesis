@@ -16,41 +16,41 @@ export const protectedRoute = (
   req: AuthRequest,
   res: Response,
   next: NextFunction
-) => {
-  const authHeader = req.headers.authorization;
+): void => {
+  const token = req.cookies?.token;
 
-  if (!authHeader || !authHeader.startsWith("Bearer ")) {
-    return res.status(401).json({ message: "Unauthorized: No token provided" });
+  if (!token) {
+    res.status(401).json({ data: { message: "Unauthorized: No token provided" } });
+    return;
   }
-
-  const token = authHeader.split(" ")[1];
 
   try {
     const decoded = jwt.verify(token, JWT_SECRET) as AuthRequest["user"];
     req.user = decoded;
     next();
   } catch (err) {
-    return res.status(401).json({ message: "Unauthorized: Invalid token" });
+    res.status(401).json({ data: { message: "Unauthorized: Invalid or expired token" } });
   }
 };
 
 type Role = "admin" | "manager" | "employee" | "viewer";
 
 export const requireRole = (...allowedRoles: Role[]) => {
-  return (req: AuthRequest, res: Response, next: NextFunction) => {
+  return (req: AuthRequest, res: Response, next: NextFunction): void => {
     const user = req.user;
 
     if (!user) {
-      return res.status(403).json({ message: "Forbidden: No user data found" });
+      res.status(403).json({ data: { message: "Forbidden: No user data found" } });
+      return;
     }
 
-    const role = user.role as "admin" | "manager" | "employee" | "viewer";
+    const role = user.role;
 
     if (!allowedRoles.includes(role)) {
-      return res.status(403).json({ message: "Forbidden: You don't have permission" });
+      res.status(403).json({ data: { message: "Forbidden: You don't have permission" } });
+      return;
     }
 
     next();
   };
 };
-
