@@ -89,7 +89,7 @@
             <div class="flex items-center">
                 <div
                     class="flex-shrink-0 w-8 h-8 bg-white text-black rounded-md flex items-center justify-center">
-                    <span class="font-medium text-sm"> {{ userInfo.name.split(' ').map(w => w[0]).join('').toUpperCase() }}
+                    <span class="font-medium text-sm"> {{ userInfo.name.split(' ').map((w: any[]) => w[0]).join('').toUpperCase() }}
 </span>
                 </div>
                 <div class="ml-3">

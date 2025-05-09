@@ -44,7 +44,7 @@
                         <option value="Beverages">Beverages</option>
                       </select>
                       <span v-if="productErrors.category" class="text-red-500 text-sm">{{ productErrors.category
-                      }}</span>
+                        }}</span>
                     </div>
 
                     <div class="sm:col-span-3">
@@ -224,10 +224,25 @@ function validateUserForm() {
 
 
 function handleSubmit() {
-  if (props.activeTab === 'products' && validateProductForm()) {
-    emit('submit-form')
-  } else if (props.activeTab === 'users' && validateUserForm()) {
-    emit('submit-user-form')
+  let isValid = false;
+
+  if (props.activeTab === 'products') {
+    isValid = validateProductForm();
+  } else if (props.activeTab === 'users') {
+    isValid = validateUserForm();
+  }
+
+
+  if (isValid) {
+    if (props.activeTab === 'products') {
+      emit('submit-form')
+    } else if (props.activeTab === 'users') {
+      emit('submit-user-form')
+    }
+  } else {
+
+    console.log('Form is invalid');
   }
 }
+
 </script>
