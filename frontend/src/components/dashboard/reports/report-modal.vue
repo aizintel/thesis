@@ -80,6 +80,8 @@
             class="w-full h-24 px-3 py-2 rounded-md border-zinc-300 shadow-sm focus:border-black focus:ring-black text-base"
             rows="3" placeholder="Add a comment about this report..."></textarea>
         </div> -->
+
+        <!-- Future use -->
       </div>
 
       <div class="px-6 py-4 border-t border-zinc-200 flex justify-between">
