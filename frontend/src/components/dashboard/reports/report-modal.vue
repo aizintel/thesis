@@ -74,14 +74,12 @@
           </div>
         </div>
 
-        <div class="mb-6">
+        <!-- <div class="mb-6">
           <h4 class="text-sm font-medium text-zinc-500 mb-2">Add Comment</h4>
-          <textarea
-            v-model="newComment"
+          <textarea v-model="newComment"
             class="w-full h-24 px-3 py-2 rounded-md border-zinc-300 shadow-sm focus:border-black focus:ring-black text-base"
-            rows="3"
-            placeholder="Add a comment about this report..."></textarea>
-        </div>
+            rows="3" placeholder="Add a comment about this report..."></textarea>
+        </div> -->
       </div>
 
       <div class="px-6 py-4 border-t border-zinc-200 flex justify-between">
@@ -89,12 +87,12 @@
           class="inline-flex items-center px-4 py-2 text-sm font-medium text-zinc-700 bg-white border border-zinc-300 rounded-md hover:bg-zinc-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black">
           Close
         </button>
-        <div class="flex space-x-3">
+        <!-- <div class="flex space-x-3">
           <button @click="saveComment"
             class="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-black rounded-md shadow-sm hover:bg-zinc-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black">
             Save Comment
           </button>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>
@@ -104,16 +102,16 @@
 import { ref, onMounted } from 'vue';
 
 interface Report {
-    id: string;
-    product: string;
-    productId: string;
-    reportedBy: string;
-    email: string;
-    issueType: string;
-    description: string;
-    date: string;
-    status: string;
-    comments?: string[];
+  id: string;
+  product: string;
+  productId: string;
+  reportedBy: string;
+  email: string;
+  issueType: string;
+  description: string;
+  date: string;
+  status: string;
+  comments?: string[];
 }
 
 const props = defineProps<{
@@ -132,7 +130,7 @@ const comments = ref<string[]>([]);
 
 onMounted(() => {
   document.body.style.overflow = 'hidden';
-  
+
   return () => {
     document.body.style.overflow = '';
   };
